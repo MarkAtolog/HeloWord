@@ -49,8 +49,13 @@ namespace Definitions.Forms
 
         public void DownloadImage(string testImage)
         {
+            string downloadDir = AqualityServices.Browser.DownloadDirectory;
+            string imagePath = Path.Combine(downloadDir, testImage);
+
             Download.Click();
-            ConditionalWait.WaitFor(f => Directory.GetFiles(AqualityServices.Browser.DownloadDirectory).Contains(testImage));
+
+            ConditionalWait.WaitFor(f => Directory.Exists(downloadDir));
+            ConditionalWait.WaitFor(f => Directory.GetFiles(downloadDir).Contains(imagePath));
         }
 
         public void UploadAvatar(string testImage)
