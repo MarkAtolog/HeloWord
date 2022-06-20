@@ -24,6 +24,7 @@ namespace UserinterfaceTest.Tests
         {
             var services = new ServiceCollection();
             services.AddSingleton<GamePageSteps>();
+            services.AddSingleton<HomePageSteps>();
             return services;
         }
 

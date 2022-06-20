@@ -16,7 +16,8 @@ namespace UserinterfaceTest.Tests
             GameSteps = ServiceProvider.GetRequiredService<GamePageSteps>();
             HomeSteps = ServiceProvider.GetRequiredService<HomePageSteps>();
             AqualityServices.Browser.Maximize();
-            AqualityServices.Browser.GoTo("https://userinyerface.com/");
+            AqualityServices.Browser.GoTo(ConfigManager.GetValue("url"));
+            
         }
 
         [Test]
