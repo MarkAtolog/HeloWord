@@ -1,8 +1,8 @@
 ﻿using Aquality.Selenium.Browsers;
 using Aquality.Selenium.Elements.Interfaces;
 using Aquality.Selenium.Forms;
-using AutoItX3Lib;
 using OpenQA.Selenium;
+using Framework.Utils;
 
 namespace Definitions.Forms
 {
@@ -56,12 +56,7 @@ namespace Definitions.Forms
         public void UploadAvatar(string testImage)
         {
             Upload.Click();
-            AutoItX3 autoit = new();
-            autoit.WinWaitActive("Open");
-            autoit.ControlFocus("Open", "", "Edit1");
-            autoit.ControlSetText("Open", "", "Edit1", Path.Combine(AqualityServices.Browser.DownloadDirectory, testImage));
-            autoit.ControlClick("Open", "", "Button1");
-
+            FileUploader.UploadFile(testImage);
         }
 
         public void SubmitForm()
