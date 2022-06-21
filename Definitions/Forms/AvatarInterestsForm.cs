@@ -35,7 +35,7 @@ namespace Definitions.Forms
         {
             UnselectAll.Click();
         }
-        public void SelectRandomInterests(int count = 3)
+        public void SelectRandomInterest(int count = 3)
         {
             Random random = new Random();
             IList<ICheckBox> interests = GetInterestsList();

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Definitions.Pages;
+using Microsoft.Extensions.DependencyInjection;
 using UserinterfaceTest.Steps;
 
 namespace UserinterfaceTest.Tests
@@ -23,6 +24,8 @@ namespace UserinterfaceTest.Tests
         private IServiceCollection GetServices()
         {
             var services = new ServiceCollection();
+            services.AddSingleton<GamePage>();
+            services.AddSingleton<HomePage>();
             services.AddSingleton<GamePageSteps>();
             services.AddSingleton<HomePageSteps>();
             return services;

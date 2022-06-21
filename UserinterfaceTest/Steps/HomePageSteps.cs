@@ -1,19 +1,25 @@
 ﻿using Definitions.Pages;
+using UserinterfaceTest.Tests;
 
 namespace UserinterfaceTest.Steps
 {
-    class HomePageSteps
+    public class HomePageSteps
     {
-        private static HomePage homePage = new();
+        private HomePage HomePage;
+
+        public HomePageSteps(HomePage homePage)
+        {
+            HomePage = homePage;
+        }
 
         public void AssertHomePageOpened()
         {
-            Assert.IsTrue(homePage.State.IsExist);
+            Assert.IsTrue(HomePage.State.IsExist);
         }
 
         public void NavigateToGame()
         {
-            homePage.ClickStartLink();
+            HomePage.ClickStartLink();
         }
     }
 }

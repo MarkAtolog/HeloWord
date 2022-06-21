@@ -6,11 +6,11 @@ namespace Definitions.Pages
 {
     public class HomePage : Form
     {
-        private static readonly By StartLinkLocator = By.XPath("//a[contains(@class,\"start__link\")]");
-        public HomePage() : base(StartLinkLocator, "Home page")
-        {
-        }
-        private ILink StartLink => ElementFactory.GetLink(StartLinkLocator, "Start link");
+        private const string StartLinkLocator = "//a[contains(@class, 'start__link')]";
+
+        private ILink StartLink => ElementFactory.GetLink(By.XPath(StartLinkLocator), "Start link");
+
+        public HomePage() : base(By.XPath(StartLinkLocator), "Home page") { }
 
         public void ClickStartLink()
         {

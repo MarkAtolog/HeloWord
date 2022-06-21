@@ -13,10 +13,10 @@ namespace UserinterfaceTest.Tests
         [SetUp]
         public void Setup()
         {
-            GameSteps = ServiceProvider.GetRequiredService<GamePageSteps>();
-            HomeSteps = ServiceProvider.GetRequiredService<HomePageSteps>();
+            GameSteps = ServiceProvider.GetService<GamePageSteps>();
+            HomeSteps = ServiceProvider.GetService<HomePageSteps>();
             AqualityServices.Browser.Maximize();
-            AqualityServices.Browser.GoTo(ConfigManager.GetValue("url"));
+            AqualityServices.Browser.GoTo("https://userinyerface.com/");//ConfigManager.GetValue("url"));
             
         }
 

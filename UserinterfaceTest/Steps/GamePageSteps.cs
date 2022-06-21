@@ -2,73 +2,78 @@
 
 namespace UserinterfaceTest.Steps
 {
-    class GamePageSteps
+    public class GamePageSteps
     {
-        private static GamePage gamePage = new();
+        private GamePage GamePage;
+
+        public GamePageSteps(GamePage gamePage)
+        {
+            GamePage = gamePage;
+        }
 
         public void AssertFirstCardOpened()
         {
-            Assert.IsTrue(gamePage.LoginForm.State.IsExist);
+            Assert.IsTrue(GamePage.LoginForm.State.IsExist);
         }
 
         public void AssertGamePageOpened()
         {
-            Assert.IsTrue(gamePage.State.IsExist);
+            Assert.IsTrue(GamePage.State.IsExist);
         }
 
         public void FillInFirstCard(string password, string emailName, string emailDomain)
         {
-            gamePage.LoginForm.EnterPassword(password);
-            gamePage.LoginForm.EnterEmailName(emailName);
-            gamePage.LoginForm.EnterEmailDomain(emailDomain);
-            gamePage.LoginForm.ExpandEmailDomainZoneList();
-            gamePage.LoginForm.SelectRandomEmailDomainZone();
-            gamePage.LoginForm.AcceptTermsAndConditions();
-            gamePage.LoginForm.SubmitForm();
+            GamePage.LoginForm.EnterPassword(password);
+            GamePage.LoginForm.EnterEmailName(emailName);
+            GamePage.LoginForm.EnterEmailDomain(emailDomain);
+            GamePage.LoginForm.ExpandEmailDomainZoneList();
+            GamePage.LoginForm.SelectRandomEmailDomainZone();
+            GamePage.LoginForm.AcceptTermsAndConditions();
+            GamePage.LoginForm.SubmitForm();
         }
 
         public void AssertSecondCardOpened()
         {
-            Assert.IsTrue(gamePage.AvatarInterestsForm.State.IsExist);
+            Assert.IsTrue(GamePage.AvatarInterestsForm.State.IsExist);
         }
 
         public void FillInSecondCard(string testImage)
         {
-            gamePage.AvatarInterestsForm.DownloadImage(testImage);
-            gamePage.AvatarInterestsForm.UnselectAllInterests();
-            gamePage.AvatarInterestsForm.SelectRandomInterests();
-            gamePage.AvatarInterestsForm.UploadAvatar(testImage);
-            gamePage.AvatarInterestsForm.SubmitForm();
+            GamePage.AvatarInterestsForm.DownloadImage(testImage);
+            GamePage.AvatarInterestsForm.UnselectAllInterests();
+            GamePage.AvatarInterestsForm.SelectRandomInterest();
+            GamePage.AvatarInterestsForm.UploadAvatar(testImage);
+            GamePage.AvatarInterestsForm.SubmitForm();
         }
 
         public void AssertThirdCardOpened()
         {
-            Assert.IsTrue(gamePage.PersonalDetailsForm.State.IsExist);
+            Assert.IsTrue(GamePage.PersonalDetailsForm.State.IsExist);
         }
 
         public void AcceptCookies()
         {
-            gamePage.CookiesForm.AcceptCookies();
+            GamePage.CookiesForm.AcceptCookies();
         }
 
         public void AssertCookiesFormClosed()
         {
-            Assert.IsTrue(!gamePage.CookiesForm.State.IsExist);
+            Assert.IsTrue(!GamePage.CookiesForm.State.IsExist);
         }
 
         public void HideHelp()
         {
-            gamePage.HelpForm.HideHelp();
+            GamePage.HelpForm.HideHelp();
         }
 
         public void AssertHelpFormHidden()
         {
-            Assert.IsTrue(gamePage.HelpForm.IsHelpFormContentHidden());
+            Assert.IsTrue(GamePage.HelpForm.IsHelpFormContentHidden());
         }
 
         public void AssertTimerStart(string time)
         {
-            string timer = gamePage.GetTimer();
+            string timer = GamePage.GetTimer();
             Assert.IsTrue(timer.EndsWith(time));
         }
     }
