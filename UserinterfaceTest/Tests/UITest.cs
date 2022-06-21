@@ -5,7 +5,7 @@ using Framework.Utils;
 
 namespace UserinterfaceTest.Tests
 {
-    public class Tests : BaseTest
+    public class UITest : BaseTest
     {
         private GamePageSteps GameSteps;
         private HomePageSteps HomeSteps;

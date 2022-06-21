@@ -3,12 +3,13 @@ using Aquality.Selenium.Elements.Interfaces;
 using Aquality.Selenium.Forms;
 using OpenQA.Selenium;
 using Framework.Utils;
+using Aquality.Selenium.Core.Elements;
 
 namespace Definitions.Forms
 {
     public class AvatarInterestsForm : Form
     {
-        public AvatarInterestsForm() : base(By.XPath("//div[contains(@class,\"avatar-and-interests__form\")]"), "Avatar and interests form") { }
+        public AvatarInterestsForm() : base(By.XPath("//div[contains(@class,'avatar-and-interests__form')]"), "Avatar and interests form") { }
 
         private static string CheckBoxXPath = "//span[contains(@class,'checkbox__box')]";
         private static ICheckBox UnselectAll => ElementFactory.GetCheckBox(By.XPath("//div[contains(@class, 'list__item') and contains(normalize-space(.), 'Unselect all')]" + CheckBoxXPath), "Unselect");
@@ -23,7 +24,7 @@ namespace Definitions.Forms
 
             foreach (var item in items)
             {
-                if (item.GetText().Contains(" all"))
+                if (item.GetText().Contains(" all") || item.FindChildElement<ICheckBox>(By.TagName("input"), "Input", state: ElementState.ExistsInAnyState).IsChecked)
                     continue;
                 else
                     interests.Add(item.FindChildElement<ICheckBox>(By.XPath(CheckBoxXPath)));
