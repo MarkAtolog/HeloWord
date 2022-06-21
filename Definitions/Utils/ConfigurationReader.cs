@@ -1,6 +1,5 @@
 ﻿using Aquality.Selenium.Core.Configurations;
 using Aquality.Selenium.Core.Utilities;
-using System.Text.Json;
 
 namespace Definitions.Utils
 {

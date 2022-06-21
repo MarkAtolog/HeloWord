@@ -24,10 +24,12 @@ namespace UserinterfaceTest.Tests
         private IServiceCollection GetServices()
         {
             var services = new ServiceCollection();
+
             services.AddSingleton<GamePage>();
             services.AddSingleton<HomePage>();
             services.AddSingleton<GamePageSteps>();
             services.AddSingleton<HomePageSteps>();
+
             return services;
         }
 
