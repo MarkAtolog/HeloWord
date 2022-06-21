@@ -2,6 +2,7 @@ using Aquality.Selenium.Browsers;
 using Microsoft.Extensions.DependencyInjection;
 using UserinterfaceTest.Steps;
 using Framework.Utils;
+using Definitions.Configurations;
 
 namespace UserinterfaceTest.Tests
 {
@@ -16,7 +17,7 @@ namespace UserinterfaceTest.Tests
             GameSteps = ServiceProvider.GetService<GamePageSteps>();
             HomeSteps = ServiceProvider.GetService<HomePageSteps>();
             AqualityServices.Browser.Maximize();
-            AqualityServices.Browser.GoTo("https://userinyerface.com/");//ConfigManager.GetValue("url"));
+            AqualityServices.Browser.GoTo(TestConfig.Url);
             
         }
 
@@ -26,7 +27,7 @@ namespace UserinterfaceTest.Tests
             string password = StringGenerator.GenerateString();
             string emailName = StringGenerator.GenerateString(upper: false);
             string emailDomain = StringGenerator.GenerateString(upper: false);
-            string testImage = "avatar.png";
+            string testImage = TestConfig.TestImage;
 
             HomeSteps.AssertHomePageOpened();
 

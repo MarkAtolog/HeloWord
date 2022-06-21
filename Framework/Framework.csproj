@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\settings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <COMReference Include="AutoItX3Lib">
       <VersionMinor>0</VersionMinor>
       <VersionMajor>1</VersionMajor>
@@ -16,6 +20,12 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\settings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
