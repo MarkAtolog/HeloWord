@@ -1,10 +1,11 @@
-﻿using Definitions.Pages;
+﻿using Aquality.Selenium.Browsers;
+using Definitions.Pages;
 
 namespace UserinterfaceTest.Steps
 {
     public class GamePageSteps
     {
-        private GamePage GamePage;
+        private readonly GamePage GamePage;
 
         public GamePageSteps(GamePage gamePage)
         {
@@ -21,13 +22,18 @@ namespace UserinterfaceTest.Steps
             Assert.IsTrue(GamePage.State.IsExist);
         }
 
-        public void FillInFirstCard(string password, string emailName, string emailDomain)
+        public void FillInUserCredentials(string password, string emailName, string emailDomain)
         {
             GamePage.LoginForm.EnterPassword(password);
+
             GamePage.LoginForm.EnterEmailName(emailName);
             GamePage.LoginForm.EnterEmailDomain(emailDomain);
             GamePage.LoginForm.ExpandEmailDomainZoneList();
             GamePage.LoginForm.SelectRandomEmailDomainZone();
+        }
+
+        public void SubmitFirstCard()
+        {
             GamePage.LoginForm.AcceptTermsAndConditions();
             GamePage.LoginForm.SubmitForm();
         }
@@ -37,12 +43,22 @@ namespace UserinterfaceTest.Steps
             Assert.IsTrue(GamePage.AvatarInterestsForm.State.IsExist);
         }
 
-        public void FillInSecondCard(string testImage)
+        public void SelectInterests(int numberOfInterests = 3)
         {
-            GamePage.AvatarInterestsForm.DownloadImage(testImage);
             GamePage.AvatarInterestsForm.UnselectAllInterests();
-            GamePage.AvatarInterestsForm.SelectRandomInterest();
+            GamePage.AvatarInterestsForm.SelectRandomInterests(numberOfInterests);
+        }
+
+        public void UploadAvatar(string testImage)
+        {
+            GamePage.AvatarInterestsForm.DownloadImage();
+            AqualityServices.ConditionalWait.WaitFor(f => Directory.Exists(AqualityServices.Browser.DownloadDirectory));
+            AqualityServices.ConditionalWait.WaitFor(f => File.Exists(Path.Combine(AqualityServices.Browser.DownloadDirectory, testImage)));
             GamePage.AvatarInterestsForm.UploadAvatar(testImage);
+        }
+
+        public void SubmitSecondCard()
+        {
             GamePage.AvatarInterestsForm.SubmitForm();
         }
 
@@ -64,6 +80,7 @@ namespace UserinterfaceTest.Steps
         public void HideHelp()
         {
             GamePage.HelpForm.HideHelp();
+            AqualityServices.ConditionalWait.WaitFor(f => GamePage.HelpForm.IsHelpFormContentHidden());
         }
 
         public void AssertHelpFormHidden()

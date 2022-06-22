@@ -1,12 +1,12 @@
 ﻿namespace Framework.Utils
 {
-    public class StringGenerator
+    public class StringUtils
     {
-        private static char[] Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-        private static char[] Digits = "0123456789".ToCharArray();
+        private static readonly char[] Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+        private static readonly char[] Digits = "0123456789".ToCharArray();
         public static string GenerateString(int len = 10, bool lower = true, bool upper = true, bool digits = true)
         {
-            Random random = new Random();
+            Random random = new();
             string result = String.Empty;
 
             for (int i = 0; i < len;)

@@ -6,18 +6,17 @@ namespace Definitions.Forms
 {
     public class LoginForm : Form
     {
+        private const string OtherZone = "other";
+        private const string DomainZoneSelectXPath = "//div[contains(@class, 'dropdown__list-item') and contains(text(), '{0}')]";
+
+        private readonly ITextBox PasswordInput = ElementFactory.GetTextBox(By.XPath("//input[contains(@placeholder, 'Password')]"), "Password");
+        private readonly ITextBox EmailInput = ElementFactory.GetTextBox(By.XPath("//input[contains(@placeholder, 'email')]"), "Email");
+        private readonly ITextBox EmailDomainInput = ElementFactory.GetTextBox(By.XPath("//input[contains(@placeholder, 'Domain')]"), "Email domain");
+        private readonly IButton EmailDomainZoneList = ElementFactory.GetButton(By.XPath("//div[contains(@class, 'dropdown__header')]"), "Dropdown domain zone");
+        private readonly ICheckBox AcceptTermsConditions = ElementFactory.GetCheckBox(By.XPath("//span[contains(@class, 'checkbox__box')]"), "Accept terms and conditions");
+        private readonly ILink Next = ElementFactory.GetLink(By.XPath("//a[contains(text(), 'Next')]"), "Next");
+
         public LoginForm() : base(By.XPath("//form"), "Login form") { }
-
-        private static readonly string OtherZone = "other";
-
-        private static string DomainZoneSelectXPath = "//div[contains(@class, 'dropdown__list-item') and contains(., '{0}')]";
-
-        private ITextBox PasswordInput => ElementFactory.GetTextBox(By.XPath("//input[contains(@placeholder, 'Password')]"), "Password");
-        private ITextBox EmailInput => ElementFactory.GetTextBox(By.XPath("//input[contains(@placeholder, 'email')]"), "Email");
-        private ITextBox EmailDomainInput => ElementFactory.GetTextBox(By.XPath("//input[contains(@placeholder, 'Domain')]"), "Email domain");
-        private IButton EmailDomainZoneList => ElementFactory.GetButton(By.XPath("//div[contains(@class, 'dropdown__header')]"), "Dropdown domain zone");
-        private ICheckBox AcceptTermsConditions => ElementFactory.GetCheckBox(By.XPath("//span[contains(@class, 'checkbox__box')]"), "Accept terms and conditions");
-        private ILink Next => ElementFactory.GetLink(By.XPath("//a[contains(., 'Next')]"), "Next");
 
         public void EnterPassword(string password)
         {
@@ -41,7 +40,7 @@ namespace Definitions.Forms
 
         public void SelectRandomEmailDomainZone()
         {
-            Random random = new Random();
+            Random random = new();
             IList<IButton> emailDomainZones = ElementFactory.FindElements<IButton>(By.XPath(string.Format(DomainZoneSelectXPath, "")), "Email domain zone");
 
             var zone = emailDomainZones[random.Next(emailDomainZones.Count)];

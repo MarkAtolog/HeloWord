@@ -8,7 +8,7 @@ namespace Definitions.Pages
     {
         private const string StartLinkLocator = "//a[contains(@class, 'start__link')]";
 
-        private ILink StartLink => ElementFactory.GetLink(By.XPath(StartLinkLocator), "Start link");
+        private readonly ILink StartLink = ElementFactory.GetLink(By.XPath(StartLinkLocator), "Start link");
 
         public HomePage() : base(By.XPath(StartLinkLocator), "Home page") { }
 

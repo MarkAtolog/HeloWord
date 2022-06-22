@@ -7,9 +7,9 @@ namespace Definitions.Pages
 {
     public class GamePage : Form
     {
-        private const string TimerXPath = "//div[contains(@class,\"timer\")]";
+        private const string TimerXPath = "//div[contains(@class, 'timer')]";
 
-        private ILabel Timer => ElementFactory.GetLabel(By.XPath(TimerXPath), "Timer");
+        private readonly ILabel Timer = ElementFactory.GetLabel(By.XPath(TimerXPath), "Timer");
 
         public GamePage() : base(By.XPath(TimerXPath), "Game page") { }
 

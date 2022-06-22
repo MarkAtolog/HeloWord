@@ -1,11 +1,10 @@
 ﻿using Definitions.Pages;
-using UserinterfaceTest.Tests;
 
 namespace UserinterfaceTest.Steps
 {
     public class HomePageSteps
     {
-        private HomePage HomePage;
+        private readonly HomePage HomePage;
 
         public HomePageSteps(HomePage homePage)
         {
