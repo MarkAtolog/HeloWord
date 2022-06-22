@@ -13,7 +13,7 @@ namespace UserinterfaceTest.Steps
 
         public void AssertHomePageOpened()
         {
-            Assert.IsTrue(HomePage.State.IsExist);
+            Assert.IsTrue(HomePage.State.IsExist, "Home page is not loaded");
         }
 
         public void NavigateToGame()

@@ -14,12 +14,12 @@ namespace UserinterfaceTest.Steps
 
         public void AssertFirstCardOpened()
         {
-            Assert.IsTrue(GamePage.LoginForm.State.IsExist);
+            Assert.IsTrue(GamePage.LoginForm.State.IsExist, "First card is not presented on the page");
         }
 
         public void AssertGamePageOpened()
         {
-            Assert.IsTrue(GamePage.State.IsExist);
+            Assert.IsTrue(GamePage.State.IsExist, "Game page is not loaded");
         }
 
         public void FillInUserCredentials(string password, string emailName, string emailDomain)
@@ -40,7 +40,7 @@ namespace UserinterfaceTest.Steps
 
         public void AssertSecondCardOpened()
         {
-            Assert.IsTrue(GamePage.AvatarInterestsForm.State.IsExist);
+            Assert.IsTrue(GamePage.AvatarInterestsForm.State.IsExist, "Second card is not presented on the page");
         }
 
         public void SelectInterests(int numberOfInterests = 3)
@@ -64,7 +64,7 @@ namespace UserinterfaceTest.Steps
 
         public void AssertThirdCardOpened()
         {
-            Assert.IsTrue(GamePage.PersonalDetailsForm.State.IsExist);
+            Assert.IsTrue(GamePage.PersonalDetailsForm.State.IsExist, "Third card is not presented on the page");
         }
 
         public void AcceptCookies()
@@ -74,7 +74,7 @@ namespace UserinterfaceTest.Steps
 
         public void AssertCookiesFormClosed()
         {
-            Assert.IsTrue(!GamePage.CookiesForm.State.IsExist);
+            Assert.IsTrue(!GamePage.CookiesForm.State.IsExist, "Cookies form is not closed");
         }
 
         public void HideHelp()
@@ -85,13 +85,13 @@ namespace UserinterfaceTest.Steps
 
         public void AssertHelpFormHidden()
         {
-            Assert.IsTrue(GamePage.HelpForm.IsHelpFormContentHidden());
+            Assert.IsTrue(GamePage.HelpForm.IsHelpFormContentHidden(), "Help form is not hidden");
         }
 
         public void AssertTimerStart(string time)
         {
             string timer = GamePage.GetTimer();
-            Assert.IsTrue(timer.EndsWith(time));
+            Assert.IsTrue(timer.EndsWith(time), "Incorrect timer start");
         }
     }
 }
