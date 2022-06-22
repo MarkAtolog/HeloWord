@@ -1,4 +1,3 @@
-using Aquality.Selenium.Browsers;
 using Definitions.Configurations;
 using Framework.Utils;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,83 +9,112 @@ namespace UserinterfaceTest.Tests
     {
         private GamePageSteps GameSteps;
         private HomePageSteps HomeSteps;
+        private BrowserUtils BrowserUtils;
 
         [SetUp]
         public void Setup()
         {
-            GameSteps = ServiceProvider.GetService<GamePageSteps>();
-            HomeSteps = ServiceProvider.GetService<HomePageSteps>();
-            AqualityServices.Browser.Maximize();
-            AqualityServices.Browser.GoTo(TestConfig.Url);
+            GameSteps = ServiceProvider.GetRequiredService<GamePageSteps>();
+            HomeSteps = ServiceProvider.GetRequiredService<HomePageSteps>();
+            BrowserUtils = ServiceProvider.GetRequiredService<BrowserUtils>();
 
+            BrowserUtils.Maximize();
+            BrowserUtils.GoTo(TestConfig.Url);
         }
 
         [Test]
-        public void ShouldBePossibleToFillInCards()
+        [Category("TC1")]
+        public void CheckCardsFilling()
         {
-            string password = StringGenerator.GenerateString();
-            string emailName = StringGenerator.GenerateString(upper: false);
-            string emailDomain = StringGenerator.GenerateString(upper: false);
+            //Arrange
+            string password = StringUtils.GenerateString();
+            string emailName = StringUtils.GenerateString(upper: false);
+            string emailDomain = StringUtils.GenerateString(upper: false);
             string testImage = TestConfig.Image;
 
+            //Assert
             HomeSteps.AssertHomePageOpened();
 
+            //Act
             HomeSteps.NavigateToGame();
+            //Assert
             GameSteps.AssertFirstCardOpened();
 
-            GameSteps.FillInFirstCard(password, emailName, emailDomain);
+            //Act
+            GameSteps.FillInUserCredentials(password, emailName, emailDomain);
+            GameSteps.SubmitFirstCard();
+            //Assert
             GameSteps.AssertSecondCardOpened();
 
-            GameSteps.FillInSecondCard(testImage);
+            //Act
+            GameSteps.SelectInterests();
+            GameSteps.UploadAvatar(testImage);
+            GameSteps.SubmitSecondCard();
+            //Assert
             GameSteps.AssertThirdCardOpened();
         }
 
         [Test]
-        public void ShouldBePossibleToHideHelpForm()
+        [Category("TC2")]
+
+        public void CheckHelpFormHiding()
         {
+            //Assert
             HomeSteps.AssertHomePageOpened();
 
+            //Act
             HomeSteps.NavigateToGame();
+            //Assert
             GameSteps.AssertGamePageOpened();
 
+            //Act
             GameSteps.HideHelp();
+            //Assert
             GameSteps.AssertHelpFormHidden();
         }
 
         [Test]
-        public void ShouldBePossibleToAcceptCokies()
+        [Category("TC3")]
+
+        public void CookiesAcceptionCheck()
         {
+            //Assert
             HomeSteps.AssertHomePageOpened();
 
+            //Act
             HomeSteps.NavigateToGame();
+            //Assert
             GameSteps.AssertGamePageOpened();
 
+            //Act
             GameSteps.AcceptCookies();
+            //Assert
             GameSteps.AssertCookiesFormClosed();
         }
 
         [Test]
+        [Category("TC4")]
+
         public void ValidateTimerStart()
         {
+            //Arrange
             string timeStart = "00:00";
 
+            //Assert
             HomeSteps.AssertHomePageOpened();
 
+            //Act
             HomeSteps.NavigateToGame();
-            GameSteps.AssertGamePageOpened();
 
+            //Assert
             GameSteps.AssertTimerStart(timeStart);
         }
 
         [TearDown]
-        public void TearDown()
+        public void CleanUp()
         {
-            if (Directory.Exists(AqualityServices.Browser.DownloadDirectory))
-            {
-                Directory.Delete(AqualityServices.Browser.DownloadDirectory, true);
-            }
-            AqualityServices.Browser.Quit();
-
+            FileUtils.CleanDownloadDirectory();
+            BrowserUtils.Quit();
         }
     }
 }

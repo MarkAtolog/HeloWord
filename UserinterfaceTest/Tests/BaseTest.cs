@@ -1,4 +1,5 @@
 ﻿using Definitions.Pages;
+using Framework.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using UserinterfaceTest.Steps;
 
@@ -29,6 +30,7 @@ namespace UserinterfaceTest.Tests
             services.AddSingleton<HomePage>();
             services.AddSingleton<GamePageSteps>();
             services.AddSingleton<HomePageSteps>();
+            services.AddTransient<BrowserUtils>();
 
             return services;
         }
