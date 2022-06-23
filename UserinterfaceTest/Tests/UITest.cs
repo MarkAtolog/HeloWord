@@ -95,7 +95,7 @@ namespace UserinterfaceTest.Tests
         [Test]
         [Category("TC4")]
 
-        public void TimerStartsWithCorrectTimeCheck()
+        public void TimerStartingCheck()
         {
             //Arrange
             string timeStart = "00:00";
