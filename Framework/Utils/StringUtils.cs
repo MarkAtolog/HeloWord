@@ -2,38 +2,50 @@
 {
     public class StringUtils
     {
-        private static readonly char[] Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-        private static readonly char[] Digits = "0123456789".ToCharArray();
-        public static string GenerateString(int len = 10, bool lower = true, bool upper = true, bool digits = true)
+        private const string upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+        private const string Digits = "0123456789";
+
+        public static string GenerateString(int len = 10, bool isLower = true, bool isUpper = true, bool isDigit = true)
         {
-            Random random = new();
-            string result = String.Empty;
+            char[] result = new char[len];
 
-            for (int i = 0; i < len;)
+            for (int i = 0; ;)
             {
-                if (lower)
+                try
                 {
-                    int letterNum = random.Next(Letters.Length);
-                    result += Char.ToLower(Letters[letterNum]);
-                    i++;
-                }
+                    if (isLower)
+                    {
+                        result[i] = GetRandomChar(lowerCaseLetters);
+                        i++;
+                    }
 
-                if (upper)
-                {
-                    int letterNum = random.Next(Letters.Length);
-                    result += Letters[letterNum];
-                    i++;
-                }
+                    if (isUpper)
+                    {
+                        result[i] = GetRandomChar(upperCaseLetters);
+                        i++;
+                    }
 
-                if (digits)
+                    if (isDigit)
+                    {
+                        result[i] = GetRandomChar(Digits);
+                        i++;
+                    }
+                }
+                catch (IndexOutOfRangeException)
                 {
-                    int digitNum = random.Next(Digits.Length);
-                    result += Char.ToLower(Digits[digitNum]);
-                    i++;
+                    break;
                 }
             }
 
-            return result;
+            return new string(result);
+        }
+
+        private static char GetRandomChar(string sequence)
+        {
+            Random random = new();
+
+            return sequence[random.Next(sequence.Length)];
         }
     }
 }
