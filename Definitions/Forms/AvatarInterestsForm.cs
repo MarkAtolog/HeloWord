@@ -10,6 +10,7 @@ namespace Definitions.Forms
         private const string ListItemXPath = "//div[contains(@class, 'list__item')]";
         private const string CheckBoxXPath = "//span[contains(@class,'checkbox__box')]";
         private const string UnselectXPath = "//div[contains(normalize-space(.), 'Unselect all')]";
+        private const string SelectAllInterestsButtonId = "selectall";
 
         private readonly IButton UnselectAllButton = ElementFactory.GetButton(By.XPath(ListItemXPath + UnselectXPath + CheckBoxXPath), "Unselect all");
         private readonly IButton NextButton = ElementFactory.GetButton(By.XPath("//button[contains(text(), 'Next')]"), "Next");
@@ -64,7 +65,8 @@ namespace Definitions.Forms
 
             foreach (var item in items)
             {
-                if (item.GetText().Contains(" all") || item.FindChildElement<ICheckBox>(By.TagName("input"), "Input", state: ElementState.ExistsInAnyState).IsChecked)
+                var input = item.FindChildElement<ICheckBox>(By.TagName("input"), "Input", state: ElementState.ExistsInAnyState);
+                if (input.IsChecked || input.GetAttribute("id").Contains(SelectAllInterestsButtonId))
                     continue;
                 else
                     interests.Add(item.FindChildElement<ICheckBox>(By.XPath(CheckBoxXPath)));
