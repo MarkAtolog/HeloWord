@@ -8,47 +8,47 @@ namespace Definitions.Forms
     {
         private const string OtherZone = "other";
         private const string DomainZoneSelectXPath = "//div[contains(@class, 'dropdown__list-item') and contains(text(), '{0}')]";
+        private const string TextBoxXPath = "//input[contains(@Placeholder,'{0}')]";
 
-        private readonly ITextBox PasswordInput = ElementFactory.GetTextBox(By.XPath("//input[contains(@placeholder, 'Password')]"), "Password");
-        private readonly ITextBox EmailInput = ElementFactory.GetTextBox(By.XPath("//input[contains(@placeholder, 'email')]"), "Email");
-        private readonly ITextBox EmailDomainInput = ElementFactory.GetTextBox(By.XPath("//input[contains(@placeholder, 'Domain')]"), "Email domain");
-        private readonly IButton EmailDomainZoneList = ElementFactory.GetButton(By.XPath("//div[contains(@class, 'dropdown__header')]"), "Dropdown domain zone");
+        private readonly ITextBox PasswordTextBox = ElementFactory.GetTextBox(By.XPath(string.Format(TextBoxXPath, "Password")), "Password");
+        private readonly ITextBox EmailTextBox = ElementFactory.GetTextBox(By.XPath(string.Format(TextBoxXPath, "email")), "Email");
+        private readonly ITextBox EmailDomainTextBox = ElementFactory.GetTextBox(By.XPath(string.Format(TextBoxXPath, "Domain")), "Email domain");
+        private readonly IButton ShowEmailDomainZonesButton = ElementFactory.GetButton(By.XPath("//div[contains(@class, 'dropdown__header')]"), "Show domain zones");
+        private readonly IButton NextButton = ElementFactory.GetButton(By.XPath("//a[contains(text(), 'Next')]"), "Next");
         private readonly ICheckBox AcceptTermsConditions = ElementFactory.GetCheckBox(By.XPath("//span[contains(@class, 'checkbox__box')]"), "Accept terms and conditions");
-        private readonly ILink Next = ElementFactory.GetLink(By.XPath("//a[contains(text(), 'Next')]"), "Next");
 
         public LoginForm() : base(By.XPath("//form"), "Login form") { }
 
         public void EnterPassword(string password)
         {
-            PasswordInput.ClearAndType(password);
+            PasswordTextBox.ClearAndType(password);
         }
 
         public void EnterEmailName(string emailName)
         {
-            EmailInput.ClearAndType(emailName);
+            EmailTextBox.ClearAndType(emailName);
         }
 
         public void EnterEmailDomain(string domain)
         {
-            EmailDomainInput.ClearAndType(domain);
-        }
-
-        public void ExpandEmailDomainZoneList()
-        {
-            EmailDomainZoneList.Click();
+            EmailDomainTextBox.ClearAndType(domain);
         }
 
         public void SelectRandomEmailDomainZone()
         {
             Random random = new();
-            IList<IButton> emailDomainZones = ElementFactory.FindElements<IButton>(By.XPath(string.Format(DomainZoneSelectXPath, "")), "Email domain zone");
+            ExpandEmailDomainZoneList();
+
+            var emailDomainZones = ElementFactory.FindElements<IButton>(By.XPath(string.Format(DomainZoneSelectXPath, "")), "Email domain zone");
 
             var zone = emailDomainZones[random.Next(emailDomainZones.Count)];
+
             if (zone.Text.Contains(OtherZone))
             {
                 emailDomainZones.Remove(zone);
                 zone = emailDomainZones[random.Next(emailDomainZones.Count)];
             }
+
             zone.Click();
         }
 
@@ -65,7 +65,12 @@ namespace Definitions.Forms
 
         public void SubmitForm()
         {
-            Next.Click();
+            NextButton.Click();
+        }
+
+        private void ExpandEmailDomainZoneList()
+        {
+            ShowEmailDomainZonesButton.Click();
         }
     }
 }

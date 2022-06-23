@@ -1,6 +1,6 @@
 ﻿using Definitions.Utils;
 
-namespace Definitions.Configurations
+namespace Definitions.Configuration
 {
     public static class TestConfig
     {

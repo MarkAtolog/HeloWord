@@ -5,12 +5,14 @@ namespace Framework.Utils
     public class BrowserUtils
     {
         private readonly Browser Browser;
+
         public BrowserUtils()
         {
             Browser = AqualityServices.Browser;
         }
 
         public string DownloadDirectory => Browser.DownloadDirectory;
+
         public string CurrentUrl => Browser.CurrentUrl;
 
         public DevToolsHandling DevTools => Browser.DevTools;

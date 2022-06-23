@@ -3,7 +3,7 @@ using Aquality.Selenium.Core.Utilities;
 
 namespace Definitions.Utils
 {
-    class ConfigurationReader
+    public class ConfigurationReader
     {
         private static readonly string PathConfig = "../../../../Definitions/Resources";
 

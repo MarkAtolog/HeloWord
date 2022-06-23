@@ -16,9 +16,9 @@ namespace Framework.Utils
             AutoItX3 autoit = new();
 
             autoit.WinWaitActive(UploadWindow);
-            autoit.ControlFocus(UploadWindow, "", FileNameField);
-            autoit.ControlSetText(UploadWindow, "", FileNameField, FileName);
-            autoit.ControlClick(UploadWindow, "", SubmitButton);
+            autoit.ControlFocus(UploadWindow, string.Empty, FileNameField);
+            autoit.ControlSetText(UploadWindow, string.Empty, FileNameField, FileName);
+            autoit.ControlClick(UploadWindow, string.Empty, SubmitButton);
         }
 
         public static void CleanDownloadDirectory()

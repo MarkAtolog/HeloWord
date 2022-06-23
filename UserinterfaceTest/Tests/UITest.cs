@@ -1,4 +1,4 @@
-using Definitions.Configurations;
+using Definitions.Configuration;
 using Framework.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using UserinterfaceTest.Steps;
@@ -24,12 +24,12 @@ namespace UserinterfaceTest.Tests
 
         [Test]
         [Category("TC1")]
-        public void CheckCardsFilling()
+        public void CardsFillingCheck()
         {
             //Arrange
             string password = StringUtils.GenerateString();
-            string emailName = StringUtils.GenerateString(upper: false);
-            string emailDomain = StringUtils.GenerateString(upper: false);
+            string emailName = StringUtils.GenerateString(isUpper: false);
+            string emailDomain = StringUtils.GenerateString(isUpper: false);
             string testImage = TestConfig.Image;
 
             //Assert
@@ -57,7 +57,7 @@ namespace UserinterfaceTest.Tests
         [Test]
         [Category("TC2")]
 
-        public void CheckHelpFormHiding()
+        public void HelpFormHidingCheck()
         {
             //Assert
             HomeSteps.AssertHomePageOpened();
@@ -95,7 +95,7 @@ namespace UserinterfaceTest.Tests
         [Test]
         [Category("TC4")]
 
-        public void ValidateTimerStart()
+        public void TimerStartsWithCorrectTimeCheck()
         {
             //Arrange
             string timeStart = "00:00";

@@ -1,5 +1,6 @@
 ﻿using Aquality.Selenium.Browsers;
 using Definitions.Pages;
+using Framework.Utils;
 
 namespace UserinterfaceTest.Steps
 {
@@ -28,7 +29,6 @@ namespace UserinterfaceTest.Steps
 
             GamePage.LoginForm.EnterEmailName(emailName);
             GamePage.LoginForm.EnterEmailDomain(emailDomain);
-            GamePage.LoginForm.ExpandEmailDomainZoneList();
             GamePage.LoginForm.SelectRandomEmailDomainZone();
         }
 
@@ -51,10 +51,11 @@ namespace UserinterfaceTest.Steps
 
         public void UploadAvatar(string testImage)
         {
-            GamePage.AvatarInterestsForm.DownloadImage();
+            GamePage.AvatarInterestsForm.ClickDownloadImage();
             AqualityServices.ConditionalWait.WaitFor(f => Directory.Exists(AqualityServices.Browser.DownloadDirectory));
             AqualityServices.ConditionalWait.WaitFor(f => File.Exists(Path.Combine(AqualityServices.Browser.DownloadDirectory, testImage)));
-            GamePage.AvatarInterestsForm.UploadAvatar(testImage);
+            GamePage.AvatarInterestsForm.ClickUploadAvatar();
+            FileUtils.UploadFile(testImage);
         }
 
         public void SubmitSecondCard()
