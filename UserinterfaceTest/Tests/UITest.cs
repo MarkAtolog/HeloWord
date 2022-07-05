@@ -1,6 +1,7 @@
 using Definitions.Configuration;
 using Framework.Utils;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 using UserinterfaceTest.Steps;
 
 namespace UserinterfaceTest.Tests
@@ -26,6 +27,11 @@ namespace UserinterfaceTest.Tests
         [Category("TC1")]
         public void CardsFillingCheck()
         {
+            Console.WriteLine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            Console.WriteLine(System.AppDomain.CurrentDomain.BaseDirectory);
+            Console.WriteLine(System.Environment.CurrentDirectory);
+            Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
+            Console.WriteLine(Environment.CurrentDirectory);
             //Arrange
             string password = StringUtils.GenerateString();
             string emailName = StringUtils.GenerateString(isUpper: false);
