@@ -5,7 +5,7 @@ namespace Definitions.Utils
 {
     public class ConfigurationReader
     {
-        private static readonly string PathConfig = "../../../../Definitions/Resources";
+        private static readonly string PathConfig = "Definitions/Resources";
 
         public static ISettingsFile GetConfigFile(string fileName) => 
             new JsonSettingsFile(Path.Combine(Directory.GetCurrentDirectory(), PathConfig, $"{fileName}.json"));
