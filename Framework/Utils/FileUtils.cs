@@ -15,17 +15,9 @@ namespace Framework.Utils
 
             AutoItX3 autoit = new();
             autoit.WinWaitActive(UploadWindow);
-            if (autoit.WinActive(UploadWindow) == 0)
-            {
-                Console.WriteLine("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-            }
+            foreach (var a in autoit.WinList(UploadWindow))
+                Console.WriteLine(a);
             autoit.WinActivate(UploadWindow);
-            if (autoit.WinActive(UploadWindow) == 0)
-            {
-                Console.WriteLine("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            }
-            else
-                Console.WriteLine("QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ");
             autoit.ControlFocus(UploadWindow, string.Empty, FileNameField);
             autoit.ControlSetText(UploadWindow, string.Empty, FileNameField, FileName);
             autoit.ControlClick(UploadWindow, string.Empty, SubmitButton);
