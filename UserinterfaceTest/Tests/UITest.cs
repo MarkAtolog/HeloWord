@@ -19,7 +19,6 @@ namespace UserinterfaceTest.Tests
             BrowserUtils = ServiceProvider.GetRequiredService<BrowserUtils>();
 
             BrowserUtils.Maximize();
-            BrowserUtils.SetWindowSize(1800,900);
             BrowserUtils.GoTo(TestConfig.Url);
         }
 
