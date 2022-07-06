@@ -110,7 +110,6 @@ namespace UserinterfaceTest.Tests
 
             //Assert
             GameSteps.AssertTimerStart(timeStart);
-            Assert.Fail();
         }
 
         [TearDown]
