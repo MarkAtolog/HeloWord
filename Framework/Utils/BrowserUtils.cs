@@ -11,6 +11,8 @@ namespace Framework.Utils
             Browser = AqualityServices.Browser;
         }
 
+        public string BrowserName => Browser.BrowserName.ToString();
+
         public string DownloadDirectory => Browser.DownloadDirectory;
 
         public string CurrentUrl => Browser.CurrentUrl;

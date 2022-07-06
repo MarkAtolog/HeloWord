@@ -1,5 +1,6 @@
 ﻿using Aquality.Selenium.Browsers;
 using AutoItX3Lib;
+using Definitions.Pages;
 
 namespace Framework.Utils
 {
@@ -11,12 +12,12 @@ namespace Framework.Utils
             string FileNameField = "Edit1";
             string SubmitButton = "Button1";
 
+            BrowserUtils BrowserUtils = new();
+            AutoItX3 autoit = new();
+
             string FileName = Path.Combine(AqualityServices.Browser.DownloadDirectory, path);
 
-            AutoItX3 autoit = new();
-            autoit.WinWaitActive(UploadWindow);
-            foreach (var a in autoit.WinList(UploadWindow))
-                Console.WriteLine(a);
+            autoit.WinActivate(GamePage.GetTitle() + " - " + BrowserUtils.BrowserName);
             autoit.WinActivate(UploadWindow);
             autoit.ControlFocus(UploadWindow, string.Empty, FileNameField);
             autoit.ControlSetText(UploadWindow, string.Empty, FileNameField, FileName);

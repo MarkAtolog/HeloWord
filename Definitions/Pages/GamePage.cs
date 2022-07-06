@@ -10,6 +10,7 @@ namespace Definitions.Pages
         private const string TimerXPath = "//div[contains(@class, 'timer')]";
 
         private readonly ILabel Timer = ElementFactory.GetLabel(By.XPath(TimerXPath), "Timer");
+        private static ILabel Title = ElementFactory.GetLabel(By.XPath("//head//title"), "Title");
 
         public GamePage() : base(By.XPath(TimerXPath), "Game page") { }
 
@@ -22,6 +23,11 @@ namespace Definitions.Pages
         public string GetTimer()
         {
             return Timer.GetText();
+        }
+
+        public static string GetTitle()
+        {
+            return Title.GetText();
         }
     }
 }
