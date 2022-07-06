@@ -1,4 +1,5 @@
-﻿using Aquality.Selenium.Elements.Interfaces;
+﻿using Aquality.Selenium.Core.Elements;
+using Aquality.Selenium.Elements.Interfaces;
 using Aquality.Selenium.Forms;
 using Definitions.Forms;
 using OpenQA.Selenium;
@@ -10,7 +11,7 @@ namespace Definitions.Pages
         private const string TimerXPath = "//div[contains(@class, 'timer')]";
 
         private readonly ILabel Timer = ElementFactory.GetLabel(By.XPath(TimerXPath), "Timer");
-        private static ILabel Title = ElementFactory.GetLabel(By.XPath("//head//title"), "Title");
+        private static ILabel Title = ElementFactory.GetLabel(By.XPath("//head//title"), "Title", ElementState.ExistsInAnyState);
 
         public GamePage() : base(By.XPath(TimerXPath), "Game page") { }
 
