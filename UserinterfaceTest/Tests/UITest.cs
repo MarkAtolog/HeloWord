@@ -1,6 +1,8 @@
 using Definitions.Configuration;
 using Framework.Utils;
 using Microsoft.Extensions.DependencyInjection;
+using System.Drawing;
+using System.Drawing.Imaging;
 using UserinterfaceTest.Steps;
 
 namespace UserinterfaceTest.Tests
@@ -108,11 +110,18 @@ namespace UserinterfaceTest.Tests
 
             //Assert
             GameSteps.AssertTimerStart(timeStart);
+            Assert.Fail();
         }
 
         [TearDown]
         public void CleanUp()
         {
+            string testName = TestContext.CurrentContext.Test.Name;
+            if (TestContext.CurrentContext.Result.Outcome.Status.ToString() != "Passed")
+            {
+                BrowserUtils.SaveScreenshot(testName);
+            }
+
             FileUtils.CleanDownloadDirectory();
             BrowserUtils.Quit();
         }

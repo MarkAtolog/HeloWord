@@ -1,4 +1,7 @@
 ﻿using Aquality.Selenium.Browsers;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Reflection;
 
 namespace Framework.Utils
 {
@@ -18,6 +21,16 @@ namespace Framework.Utils
         public string CurrentUrl => Browser.CurrentUrl;
 
         public DevToolsHandling DevTools => Browser.DevTools;
+
+        public void SaveScreenshot(string testName)
+        {
+            var screenshot = Browser.GetScreenshot();
+            string imagePath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), $"../../../../{testName}_screenshot.png");
+            using (Image image = Image.FromStream(new MemoryStream(screenshot)))
+            {
+                image.Save(imagePath, ImageFormat.Png);
+            }
+        }
 
         public void Quit() => Browser.Quit();
 
