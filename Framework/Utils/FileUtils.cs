@@ -14,7 +14,7 @@ namespace Framework.Utils
             string FileName = Path.Combine(AqualityServices.Browser.DownloadDirectory, path);
 
             AutoItX3 autoit = new();
-
+            autoit.WinActivate(UploadWindow);
             autoit.WinWaitActive(UploadWindow);
             autoit.ControlFocus(UploadWindow, string.Empty, FileNameField);
             autoit.ControlSetText(UploadWindow, string.Empty, FileNameField, FileName);
