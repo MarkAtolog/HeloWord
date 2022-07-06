@@ -19,7 +19,7 @@ namespace UserinterfaceTest.Tests
             HomeSteps = ServiceProvider.GetRequiredService<HomePageSteps>();
             BrowserUtils = ServiceProvider.GetRequiredService<BrowserUtils>();
 
-            BrowserUtils.SetWindowSize(1920,1080);
+            BrowserUtils.SetWindowSize(1800,900);
             BrowserUtils.GoTo(TestConfig.Url);
         }
 
