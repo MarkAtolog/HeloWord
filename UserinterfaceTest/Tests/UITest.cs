@@ -1,7 +1,6 @@
 using Definitions.Configuration;
 using Framework.Utils;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using UserinterfaceTest.Steps;
 
 namespace UserinterfaceTest.Tests
@@ -19,6 +18,7 @@ namespace UserinterfaceTest.Tests
             HomeSteps = ServiceProvider.GetRequiredService<HomePageSteps>();
             BrowserUtils = ServiceProvider.GetRequiredService<BrowserUtils>();
 
+            BrowserUtils.Maximize();
             BrowserUtils.SetWindowSize(1800,900);
             BrowserUtils.GoTo(TestConfig.Url);
         }
